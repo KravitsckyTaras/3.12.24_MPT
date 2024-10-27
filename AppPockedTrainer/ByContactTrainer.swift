@@ -1,6 +1,5 @@
 import SwiftUI
 
-// Структура данных для хранения информации об имени и URL
 struct TrainerInfo {
     let imageName: String
     let name: String
@@ -9,13 +8,15 @@ struct TrainerInfo {
 }
 
 struct ByContactTrainer: View {
-    @Environment(\.openURL) var openURL  // Экземпляр для открытия URL
+    @Environment(\.colorScheme) var colorScheme
+
+    @Environment(\.openURL) var openURL
     
     // Массив с данными тренеров с индивидуальными URL
     let trainerData: [TrainerInfo] = [
         TrainerInfo(imageName: "Sasha", name: "Саша", telegramURL: "https://t.me/Sash88FRDM", instagramURL: "https://www.instagram.com/sasha_fitness_coach/profilecard/?igsh=Z3h1NWNvM2lwajJs"),
         TrainerInfo(imageName: "Taras", name: "Тарас", telegramURL: "https://t.me/trener_taras", instagramURL: "https://www.instagram.com/trener_taras"),
-        TrainerInfo(imageName: "pngwing", name: "Тут можеш бути ти.", telegramURL: "", instagramURL: ""),
+        
        
     ]
     
@@ -23,28 +24,33 @@ struct ByContactTrainer: View {
     @State private var selectedTrainer: TrainerInfo?
 
     var body: some View {
-        ZStack { // Используем ZStack для наложения элементов
-            // Фоновое изображение
-            Image("listBumagy") // Замените на имя вашего изображения
+        ZStack {
+
+            Image(colorScheme == .dark ? "listBumagy2" : "listBumagy")
                 .resizable()
                 .scaledToFill()
-                .ignoresSafeArea() // Заполняем весь экран
+                .edgesIgnoringSafeArea(.all)
             
             VStack {
                 Text("Обери тренера.")
                     .font(.title)
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 50)
+                    .background(colorScheme == .dark ? Color.black.opacity(0.4) : Color.black.opacity(0.1))
+                    .foregroundColor(colorScheme == .dark ? .white : .black)
+                    .cornerRadius(8)
+                    .shadow(radius: 5)
                     .padding()
                 
-                // ScrollView для вертикальной прокрутки
+                
                 ScrollView {
                     LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 20) {
                         ForEach(trainerData, id: \.name) { trainer in
-                            VStack { // Изменено на VStack, чтобы разместить имя над изображением
+                            VStack {
                                 
-                                // Изображение тренера
                                 Button(action: {
                                     selectedTrainer = trainer
-                                    showCustomAlert = true  // Показываем кастомный алерт
+                                    showCustomAlert = true
                                 }) {
                                     Image(trainer.imageName)
                                         .resizable()
@@ -54,19 +60,19 @@ struct ByContactTrainer: View {
                                         .shadow(color: .gray, radius: 5, x: 0, y: 5)
                                 }
                                 
-                                // Черный фон с прозрачностью под текстом имени
+                                
                                 ZStack {
                                     Color.black.opacity(0.5)
                                         .cornerRadius(10)
 
-                                    Text("Тренер: \(trainer.name)") // Имя тренера с приставкой
+                                    Text("Тренер: \(trainer.name)")
                                         .font(.headline)
                                         .foregroundColor(.white)
-                                        .padding(5) // Отступ для текста
+                                        .padding(5)
                                 }
-                                .frame(width: 150) // Устанавливаем ширину, равную ширине изображения
+                                .frame(width: 150)
                             }
-                            .padding(.vertical, 5)  // Вертикальные отступы между элементами
+                            .padding(.vertical, 5)
                         }
                     }
                     .padding()
@@ -78,7 +84,7 @@ struct ByContactTrainer: View {
                         VStack(spacing: 20) {
                             HStack {
                                 VStack(alignment: .leading, spacing: 10) {
-                                    Text("Тренер: \(selectedTrainer?.name ?? "Тренер")") // Добавляем "Тренер" перед именем
+                                    Text("Тренер: \(selectedTrainer?.name ?? "Тренер")")
                                         .font(.system(size: 18, weight: .bold))
 
                                     HStack(spacing: 20) {
@@ -89,7 +95,7 @@ struct ByContactTrainer: View {
                                         }) {
                                             Image("telega")
                                                 .resizable()
-                                                .frame(width: 60, height: 60) // Укажите размер иконки
+                                                .frame(width: 60, height: 60)
                                         }
                                       
 
@@ -100,7 +106,7 @@ struct ByContactTrainer: View {
                                         }) {
                                             Image("insta")
                                                 .resizable()
-                                                .frame(width: 60, height: 60) // Укажите размер иконки
+                                                .frame(width: 60, height: 60)
                                         }
                                     }
 
@@ -110,10 +116,7 @@ struct ByContactTrainer: View {
                                 
                                 
 
-                                Image(selectedTrainer?.imageName ?? "")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 110, height: 110)
+                               
                             }
                             .padding(.horizontal)
 

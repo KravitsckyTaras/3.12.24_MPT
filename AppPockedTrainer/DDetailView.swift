@@ -15,10 +15,11 @@ struct MuscleGroup: Identifiable {
 }
 
 struct DDetailView: View {
+    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.colorScheme) var colorScheme
     @Binding var selectedExerciseName: String?
     @Binding var selectedImage: String?
 
-    @Environment(\.presentationMode) var presentationMode
 
     // Групи м'язів з вправами
     let muscleGroups: [MuscleGroup] = [
@@ -43,6 +44,17 @@ struct DDetailView: View {
             Exercise(name: "Підйом на носки у тренажері.", imageName: "77"),
             Exercise(name: "Відштовхування платформи носками.", imageName: "78"),
             Exercise(name: "Підйом стопи вгору.", imageName: "80"),
+            Exercise(name: "Підйом на платформу.", imageName: "68"),
+            Exercise(name: "Швунг зі штангою.", imageName: "70"),
+            Exercise(name: "Випади з гантелями.", imageName: "85"),
+            Exercise(name: "Сідничний мостик.", imageName: "199"),
+            Exercise(name: "Підйом на носки сидячі.", imageName: "79"),
+            
+            
+
+            
+            
+            
             
          
            
@@ -92,6 +104,7 @@ struct DDetailView: View {
             Exercise(name: "Зворотні зведеня у тренажері.", imageName: "11"),
             Exercise(name: "Зведеня гантель над головою стоячі.", imageName: "12"),
             Exercise(name: "Згинання рук зі штангою стоячи.", imageName: "13"),
+            Exercise(name: "Згинання рук зі штангою зворотній хват.", imageName: "19"),
             Exercise(name: "Молотки", imageName: "14"),
             Exercise(name: "Згинання рук з гантелямі н скамьі Скота.", imageName: "15"),
             Exercise(name: "Згинання руку з нижнього блоку.", imageName: "16"),
@@ -124,97 +137,103 @@ struct DDetailView: View {
     ]
 
     var body: some View {
-           ZStack {
-               // Фонове зображення
-               Image("listBumagy") // Замените "listBumagy" на имя вашего изображения
-                   .resizable()
-                   .scaledToFill()
-                   .edgesIgnoringSafeArea(.all) // Изображение будет занимать весь экран
-               
-               ScrollView {
-                   VStack(alignment: .leading, spacing: 20){
-                       VStack(alignment: .leading, spacing: 20) {
-                           ForEach(muscleGroups) { group in
-                               VStack(alignment: .leading) {
-                                   Text(group.name)
-                                       .frame(maxWidth: .infinity)
-                                       .frame(height: 50)
-                                       .background(Color.black.opacity(0.2))
-                                       .cornerRadius(8)
-                                       .shadow(radius: 5)
+        ZStack {
+           
+            Image(colorScheme == .dark ? "listBumagy2" : "listBumagy")
+                .resizable()
+                .scaledToFill()
+                .edgesIgnoringSafeArea(.all)
 
-                                   ScrollView(.horizontal, showsIndicators: false) {
-                                       HStack(spacing: 15) {
-                                           ForEach(group.exercises) { exercise in
-                                               VStack {
-                                                   Button(action: {
-                                                       selectedExerciseName = exercise.name
-                                                       selectedImage = exercise.imageName
-                                                       presentationMode.wrappedValue.dismiss()
-                                                   }) {
-                                                       Image(exercise.imageName)
-                                                           .resizable()
-                                                           .frame(width: 100, height: 100)
-                                                           .background(Color.gray.opacity(0.2))
-                                                           .cornerRadius(8)
-                                                           .shadow(radius: 5)
-                                                   }
-                                                   Text(exercise.name)
-                                                       .font(.caption)
-                                                       .multilineTextAlignment(.center)
-                                                       .padding(5)
-                                                       .frame(width: 100) // Обмежуємо ширину тексту
-                                                       .background(Color.gray.opacity(0.2))
-                                                       .cornerRadius(8)
-                                                       .lineLimit(1) // Обмежуємо до одного рядка
-                                                       .truncationMode(.tail) // Додаємо три крапки, якщо текст перевищує ширину
-                                               }
-                                           }
-                                       }
-                                       
-                                   }
-                                   
-                                   
-                               }
-                               .padding(.horizontal, 20) // Відступи з боків
-                               .padding(.vertical, 10) // Відступи зверху і знизу
-                               .cornerRadius(10) // Заокруглення кутів
-                               .shadow(radius: 5) // Тінь для секції
-                           }
-                       }
-                   }
-                   
-                  
-                   .navigationBarBackButtonHidden(true) // Скрыть кнопку «Назад»
+            ScrollView {
+                VStack(alignment: .leading, spacing: 20) {
+                    VStack(alignment: .leading, spacing: 20) {
+                        ForEach(muscleGroups) { group in
+                            VStack(alignment: .leading) {
+                                Text(group.name)
+                                    .frame(maxWidth: .infinity)
+                                    .frame(height: 50)
+                                    .background(colorScheme == .dark ? Color.black.opacity(0.2) : Color.white.opacity(0.2))
+                                    .foregroundColor(colorScheme == .dark ? .white : .black)
+                                    .cornerRadius(8)
+                                    .shadow(radius: 5)
 
-               }
-               VStack {
-                   Spacer()
-                   HStack {
-                       Button(action: {
-                           presentationMode.wrappedValue.dismiss()
-                       }) {
-                           Image(systemName: "house.fill")
-                               .font(.largeTitle)
-                               .foregroundColor(.black)
-                               .padding(.vertical, 10)
+                                ScrollView(.horizontal, showsIndicators: false) {
+                                    HStack(spacing: 15) {
+                                        ForEach(group.exercises) { exercise in
+                                            VStack {
+                                                Button(action: {
+                                                    selectedExerciseName = exercise.name
+                                                    selectedImage = exercise.imageName
+                                                    presentationMode.wrappedValue.dismiss()
+                                                }) {
+                                                    Image(exercise.imageName)
+                                                        .resizable()
+                                                        .frame(width: 100, height: 100)
+                                                        .background(colorScheme == .dark ? Color.white.opacity(0.2) : Color.gray.opacity(0.2))
+                                                        .cornerRadius(8)
+                                                        .shadow(radius: 5)
+                                                }
+                                                Text(exercise.name)
+                                                    .font(.caption)
+                                                    .multilineTextAlignment(.center)
+                                                    .padding(5)
+                                                    .frame(width: 100)
+                                                    .background(colorScheme == .dark ? Color.white.opacity(0.2) : Color.gray.opacity(0.2))
+                                                    .cornerRadius(8)
+                                                    .foregroundColor(colorScheme == .dark ? .white : .black)
+                                                    .lineLimit(1)
+                                                    .truncationMode(.tail)
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            .padding(.horizontal, 20) // Відступи з боків
+                            .padding(.vertical, 10) // Відступи зверху і знизу
+                            .cornerRadius(10) // Заокруглення кутів
+                            .shadow(radius: 5) // Тінь для секції
+                        }
+                    }
+                }
+                .navigationBarBackButtonHidden(true)
+            }
 
-                       }
+            VStack {
+                Spacer()
+                HStack {
+                    Button(action: {
+                        presentationMode.wrappedValue.dismiss()
+                    }) {
+                        Image(systemName: "house.fill")
+                            .font(.largeTitle)
+                            .foregroundColor(colorScheme == .dark ? .white : .black)
+                                .padding(.vertical, 10)
+                    }
+                    .frame(maxWidth: .infinity)
+                    .background(Color.black.opacity(0.2))
 
-                       .frame(maxWidth: .infinity)
-                       .background(Color.gray.opacity(0.2))
-                   }
-                   
-               }
-           }
-       }
-   }
+                }
+            }
+        }
+    }
+}
 
-   // Превью для DDetailView
-   struct DDetailView_Previews: PreviewProvider {
-       static var previews: some View {
-           DDetailView(selectedExerciseName: .constant(nil), selectedImage: .constant(nil))
-       }
-   }
+struct DDetailView_Previews: PreviewProvider {
+    static var previews: some View {
+        Group {
+            DDetailView(selectedExerciseName: .constant(nil), selectedImage: .constant(nil))
+                .preferredColorScheme(.light)
+            DDetailView(selectedExerciseName: .constant(nil), selectedImage: .constant(nil))
+                .preferredColorScheme(.dark)
+        }
+    }
+}
+
+
+
+
+
+
+   
 
 

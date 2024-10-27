@@ -97,8 +97,10 @@ let Bbuttons = [
 ]
 
 
-// Основное представление, содержащее горизонтальный слайдер и кнопки слайдера.
+
 struct Back: View {
+    @Environment(\.colorScheme) var colorScheme
+
     @State private var selectedIndex = 0
     @Environment(\.presentationMode) var presentationMode
 
@@ -106,9 +108,9 @@ struct Back: View {
         NavigationView {
             GeometryReader { geometry in
                 ZStack {
-                    Image("listBumagy")
+                    Image(colorScheme == .dark ? "listBumagy2" : "listBumagy") 
                         .resizable()
-                        .aspectRatio(contentMode: .fill)
+                        .scaledToFill()
                         .edgesIgnoringSafeArea(.all)
                     
                     VStack {
@@ -119,6 +121,8 @@ struct Back: View {
                                         SliderButtonView(button: Bbuttons[index], selectedIndex: $selectedIndex, index: index, geometry: geometry)
                                     }
                                 }
+                                .background(colorScheme == .dark ? .white.opacity(0.8) : .black.opacity(0.2))
+                                .cornerRadius(8)
                             }
                             .padding()
                         }
@@ -128,24 +132,16 @@ struct Back: View {
                     }
                 }
                 VStack {
-                    // Ваш основной контент здесь
-                    
-                    Spacer() // Отодвигает содержимое вверх
-
-                    // Иконка "Назад" внизу
+                    Spacer()
                     Button(action: {
-                        // Возврат на предыдущий экран
                         presentationMode.wrappedValue.dismiss()
                     }) {
                         Image(systemName: "house.fill")
                             .font(.largeTitle)
-                            .foregroundColor(.black)
-                            .padding(.vertical, 10)
+                            .foregroundColor(colorScheme == .dark ? .white : .black)                            .padding(.vertical, 10)
                     }
-                    
                     .frame(maxWidth: .infinity)
-                    .background(Color.gray.opacity(0.2))
-
+                    .background(Color.black.opacity(0.2))
                 }
             }
         }

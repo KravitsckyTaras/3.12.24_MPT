@@ -29,6 +29,7 @@ func loadData(for day: String) -> [IInputFieldSection]? {
 
 struct NewTrainingWindow: View {
     @Environment(\.presentationMode) var presentationMode
+    @Environment(\.colorScheme) var colorScheme 
     @State private var keyboardHeight: CGFloat = 0
     @State private var inputFields: [IInputFieldSection] = []
     @FocusState private var currentFieldIndex: Int?
@@ -123,7 +124,7 @@ struct NewTrainingWindow: View {
                         Image(systemName: "plus.circle")
                             .resizable()
                             .frame(width: 60, height: 60)
-                            .foregroundColor(.black)
+                            .foregroundColor(colorScheme == .dark ? .white : .black) // Цвет в зависимости от темы
                             .padding(.top, 50)
                             .onTapGesture {
                                 inputFields.append(IInputFieldSection(fields: Array(repeating: "", count: 8), selectedExerciseName: nil, selectedImage: nil))
@@ -158,7 +159,7 @@ struct NewTrainingWindow: View {
                 }) {
                     Image(systemName: "house.fill")
                         .font(.largeTitle)
-                        .foregroundColor(.black)
+                        .foregroundColor(colorScheme == .dark ? .white : .black) // Цвет в зависимости от темы
                         .frame(maxWidth: .infinity)
                 }
                 .padding()
@@ -168,7 +169,7 @@ struct NewTrainingWindow: View {
                 }) {
                     Image(systemName: "square.and.arrow.up.fill")
                         .font(.largeTitle)
-                        .foregroundColor(.black)
+                        .foregroundColor(colorScheme == .dark ? .white : .black) // Цвет в зависимости от темы
                         .frame(maxWidth: .infinity)
                 }
                 .padding()
@@ -178,10 +179,21 @@ struct NewTrainingWindow: View {
                 }) {
                     Image(systemName: "square.and.arrow.down.fill")
                         .font(.largeTitle)
-                        .foregroundColor(.black)
+                        .foregroundColor(colorScheme == .dark ? .white : .black) // Цвет в зависимости от темы
                         .frame(maxWidth: .infinity)
                 }
                 .padding()
+                Button(action: {
+                   // showingDownloadDays = true
+                }) {
+                    Image(systemName: "square.and.arrow.up.fill")
+                        .font(.largeTitle)
+                        .foregroundColor(colorScheme == .dark ? .white : .black) // Цвет в зависимости от темы
+                        .frame(maxWidth: .infinity)
+                }
+                .padding()
+
+               
 
                 Button(action: {
                     while true {
@@ -197,20 +209,15 @@ struct NewTrainingWindow: View {
                 }) {
                     Image(systemName: "trash.fill")
                         .font(.largeTitle)
-                        .foregroundColor(.black)
+                        .foregroundColor(colorScheme == .dark ? .white : .black) // Цвет в зависимости от темы
                         .frame(maxWidth: .infinity)
-                    
                 }
                 .padding()
-                
-                
-                
-                
             }
-            .background(Color.gray.opacity(0.2))
+            .background(Color.black.opacity(0.2))
         }
         .background(
-            Image("listBumagy")
+            Image(colorScheme == .dark ? "listBumagy2" : "listBumagy") // Умова для зміни зображення фону
                 .resizable()
                 .scaledToFill()
                 .ignoresSafeArea()
@@ -234,6 +241,9 @@ struct NewTrainingWindow: View {
         .onDisappear {
             NotificationCenter.default.removeObserver(self)
         }
+    
+
+        
         
        
        
@@ -244,6 +254,8 @@ struct NewTrainingWindow: View {
         .sheet(isPresented: $showingDownloadDays) {
             DownloadDaysView(inputFields: $inputFields, showingDownloadDays: $showingDownloadDays) // Передайте inputFields і showingDownloadDays
         }
+    
+
     }
     private var currentFieldPlaceholder: String {
         guard let index = currentFieldIndex else { return "" }
@@ -359,3 +371,11 @@ struct NewTrainingWindow_Previews: PreviewProvider {
         NewTrainingWindow()
     }
 }
+
+
+
+
+
+
+
+

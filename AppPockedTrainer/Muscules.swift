@@ -22,21 +22,22 @@ enum MuscleType: CaseIterable {
     }
 }
 
-// Екран Muscules
+// Экран Muscules
 struct Muscules: View {
     @Environment(\.presentationMode) var presentationMode
+    @Environment(\.colorScheme) var colorScheme // Получаем текущую тему экрана
 
     var body: some View {
         NavigationView {
             ZStack {
-                Image("listBumagy")
+                // Фоновое изображение зависит от темы экрана
+                Image(colorScheme == .dark ? "listBumagy2" : "listBumagy")
                     .resizable()
                     .scaledToFill()
                     .edgesIgnoringSafeArea(.all)
                 
                 GeometryReader { geometry in
                     ScrollView {
-                        // Создание сетки с 3 строками
                         LazyVGrid(columns: columns, spacing: 10) {
                             let iconWidth = (geometry.size.width / 3) - 20
                             let iconHeight = iconWidth * 1.27
@@ -47,22 +48,18 @@ struct Muscules: View {
                                         .resizable()
                                         .scaledToFit()
                                         .frame(width: iconWidth, height: iconHeight)
-                                        .background(Color.gray.opacity(0.4))
+                                        .background(colorScheme == .dark ? Color.black.opacity(0.3) : Color.black.opacity(0.3))
                                         .cornerRadius(10)
                                 }
                             }
                         }
                         .padding(.top, 20)
-
                         .padding(.horizontal, 30)
                     }
                     Spacer()
-
-                    .padding(.top, 40)
+                        .padding(.top, 40)
                 }
             
-                
-                // Нижнее меню
                 VStack {
                     Spacer()
                     HStack {
@@ -71,15 +68,12 @@ struct Muscules: View {
                         }) {
                             Image(systemName: "house.fill")
                                 .font(.largeTitle)
-                                .foregroundColor(.black)
+                                .foregroundColor(colorScheme == .dark ? .white : .black)
                                 .padding(.vertical, 10)
-
                         }
-
                         .frame(maxWidth: .infinity)
-                        .background(Color.gray.opacity(0.2))
+                        .background(colorScheme == .dark ? Color.black.opacity(0.2) : Color.black.opacity(0.2))
                     }
-                    
                 }
             }
         }
@@ -114,8 +108,8 @@ struct Muscules: View {
 struct Muscules_Previews: PreviewProvider {
     static var previews: some View {
         Muscules()
+            .preferredColorScheme(.light) // Превью для светлой темы
+        Muscules()
+            .preferredColorScheme(.dark) // Превью для тёмной темы
     }
 }
-
-
-

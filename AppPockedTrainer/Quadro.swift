@@ -3,95 +3,86 @@ import AVKit
 import WebKit
 
 
-
-
-
-// Пример данных для кнопок слайдера
 let Quadrobuttons = [
     SliderButton(
         title: "Присідання.",
         description: "Опис кнопки 1",
-        videoURL: URL(string: "https://www.youtube.com/embed/OKh6bbwDo7M?si=NsiUS1iWA9Fa5qfw"), // Прямой URL видеофайла
-        previewImageName: "62", // Имя изображения из ассетов (опционально).
+        videoURL: URL(string: "https://www.youtube.com/embed/OKh6bbwDo7M?si=NsiUS1iWA9Fa5qfw"),
+        previewImageName: "62",
         progressValues: [1, 1, 0.8, 0.8],
         progressTexts: ["  Сідниці.", "  Стегна квадрицепс.", "  Спина .",  "Стегна біцепс"]
-        ,progressColors: [.red, .red, .yellow, .yellow,]  // Цвета для шкалы прогресса
+        ,progressColors: [.red, .red, .yellow, .yellow,]
     ),
     SliderButton(
         title: "Присідання у Сміті.",
         description: "Опис кнопки  1",
-        videoURL: URL(string: ""), // Прямой URL видеофайла
-        previewImageName: "63", // Имя изображения из ассетов (опционально).
+        videoURL: URL(string: ""),
+        previewImageName: "63",
         progressValues: [1, 1, 0.8, 0.8],
         progressTexts: ["  Сідниці.", "  Стегна квадрицепс.", "  Стегна біцепс",  ""]
-        ,progressColors: [.red, .red, .yellow, .yellow,]  // Цвета для шкалы прогресса
+        ,progressColors: [.red, .red, .yellow, .yellow,]
     ),
     SliderButton(
         title: "Фронтальні присідання у Сміті.",
         description: "Опис кнопки  1",
-        videoURL: URL(string: "https://www.youtube.com/embed/siBvG_gKhfU?si=2ilP72GxKVfxcHNm"), // Прямой URL видеофайла
-        previewImageName: "64", // Имя изображения из ассетов (опционально).
+        videoURL: URL(string: "https://www.youtube.com/embed/siBvG_gKhfU?si=2ilP72GxKVfxcHNm"),
+        previewImageName: "64",
         progressValues: [1, 1, 0.8, 0.8],
         progressTexts: ["  Сідниці.", "  Стегна квадрицепс.", "  Стегна біцепс",  ""]
-        ,progressColors: [.red, .red, .yellow, .yellow,]  // Цвета для шкалы прогресса
-    ),
+        ,progressColors: [.red, .red, .yellow, .yellow,]      ),
     SliderButton(
         title: "Гак-присідання.",
         description: "Опис кнопки  1",
-        videoURL: URL(string: ""), // Прямой URL видеофайла
-        previewImageName: "65", // Имя изображения из ассетов (опционально).
+        videoURL: URL(string: ""),
+        previewImageName: "65",
         progressValues: [1, 1, 0.8, 0.8],
         progressTexts: ["  Сідниці.", "  Стегна квадрицепс.", "  Спина .",  "Стегна біцепс"]
-        ,progressColors: [.red, .red, .yellow, .yellow,]  // Цвета для шкалы прогресса
+        ,progressColors: [.red, .red, .yellow, .yellow,]
     ),
     SliderButton(
         title: "Виподи зі штангою.",
         description: "Опис кнопки  1",
-        videoURL: URL(string: "https://www.youtube.com/embed/PiVE_Ulh_F0?si=1FSokkVbEEhxk34p"), // Прямой URL видеофайла
-        previewImageName: "67", // Имя изображения из ассетов (опционально).
+        videoURL: URL(string: "https://www.youtube.com/embed/PiVE_Ulh_F0?si=1FSokkVbEEhxk34p"),
+        previewImageName: "67",
         progressValues: [1, 1, 0.8, 0.8],
         progressTexts: ["  Сідниці.", "  Стегна квадрицепс.", "  Спина .",  "Стегна біцепс"]
-        ,progressColors: [.red, .red, .yellow, .yellow,]  // Цвета для шкалы прогресса
+        ,progressColors: [.red, .red, .yellow, .yellow,]
     ),
     SliderButton(
         title: "Підйом на платформу.",
         description: "Опис кнопки  1",
-        videoURL: URL(string: ""), // Прямой URL видеофайла
-        previewImageName: "68", // Имя изображения из ассетов (опционально).
+        videoURL: URL(string: ""),
+        previewImageName: "68",
         progressValues: [1, 1, 0.8, 0.8],
         progressTexts: ["  Сідниці.", "  Стегна квадрицепс.", "  Стегна біцепс",  ""]
-        ,progressColors: [.red, .red, .yellow, .yellow,]  // Цвета для шкалы прогресса
+        ,progressColors: [.red, .red, .yellow, .yellow,]
     ),
     SliderButton(
         title: "Розгинання ніг сидячі.",
         description: "Опис кнопки  1",
-        videoURL: URL(string: "https://www.youtube.com/embed/VBrRYOI-jfM?si=xtZ6LS8i0ujVIRFz"), // Прямой URL видеофайла
-        previewImageName: "69", // Имя изображения из ассетов (опционально).
+        videoURL: URL(string: "https://www.youtube.com/embed/VBrRYOI-jfM?si=xtZ6LS8i0ujVIRFz"),
+        previewImageName: "69",
         progressValues: [1, 1, 1, 0],
         progressTexts: ["  Стегна квадрицепс: Широка медіальна.", "  Стегна квадрицепс: Широка латеральна.", "  Стегна квадрицепс: Прямий м'яз стегна.",  ""]
-        ,progressColors: [.red, .red, .red, .yellow,]  // Цвета для шкалы прогресса
+        ,progressColors: [.red, .red, .red, .yellow,]
     ),
     
     SliderButton(
         title: "Ривок штанги на груди.",
         description: "Опис кнопки  1",
-        videoURL: URL(string: ""), // Прямой URL видеофайла
-        previewImageName: "70", // Имя изображения из ассетов (опционально).
+        videoURL: URL(string: ""),
+        previewImageName: "70",
         progressValues: [1, 1, 1, 0.8],
         progressTexts: ["  Плечі.", "  Сідниці.", "  Стегна квадрицепс.",  "  Стегна біцепс"]
-        ,progressColors: [.red, .red, .red, .yellow,]  // Цвета для шкалы прогресса
+        ,progressColors: [.red, .red, .red, .yellow,]
     ),
     
-    
-
-
-
 
 ]
 
-
-// Основное представление, содержащее горизонтальный слайдер и кнопки слайдера.
 struct Quadro: View {
+    @Environment(\.colorScheme) var colorScheme
+
     @State private var selectedIndex = 0
     @Environment(\.presentationMode) var presentationMode
 
@@ -99,9 +90,9 @@ struct Quadro: View {
         NavigationView {
             GeometryReader { geometry in
                 ZStack {
-                    Image("listBumagy")
+                    Image(colorScheme == .dark ? "listBumagy2" : "listBumagy") 
                         .resizable()
-                        .aspectRatio(contentMode: .fill)
+                        .scaledToFill()
                         .edgesIgnoringSafeArea(.all)
                     
                     VStack {
@@ -112,6 +103,8 @@ struct Quadro: View {
                                         SliderButtonView(button: Quadrobuttons[index], selectedIndex: $selectedIndex, index: index, geometry: geometry)
                                     }
                                 }
+                                .background(colorScheme == .dark ? .white.opacity(0.8) : .black.opacity(0.2))
+                                .cornerRadius(8)
                             }
                             .padding()
                         }
@@ -120,32 +113,24 @@ struct Quadro: View {
                     }
                 }
                 VStack {
-                    // Ваш основной контент здесь
-                    
-                    Spacer() // Отодвигает содержимое вверх
-
-                    // Иконка "Назад" внизу
+                    Spacer()
                     Button(action: {
-                        // Возврат на предыдущий экран
                         presentationMode.wrappedValue.dismiss()
                     }) {
                         Image(systemName: "house.fill")
                             .font(.largeTitle)
-                            .foregroundColor(.black)
-                            .padding(.vertical, 10)
+                            .foregroundColor(colorScheme == .dark ? .white : .black)                            .padding(.vertical, 10)
                     }
-                    
                     .frame(maxWidth: .infinity)
-                    .background(Color.gray.opacity(0.2))
-
+                    .background(Color.black.opacity(0.2))
                 }
             }
         }
-        .navigationBarBackButtonHidden(true) // Скрыть кнопку «Назад»
+        .navigationBarBackButtonHidden(true)
     }
 }
 
-// Провайдер предварительного просмотра для SwiftUI.
+
 struct QuadroDetailView_Previews: PreviewProvider {
     static var previews: some View {
         Quadro()

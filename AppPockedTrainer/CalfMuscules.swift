@@ -1,25 +1,25 @@
 import SwiftUI 
 
-// Пример данных для кнопок слайдера
+
 let CalfMusculesbuttons = [
-    // Создаем массив кнопок слайдера, каждая из которых представляет упражнение
+    
     SliderButton(
-        title: "Підйом на носки стоячі.", // Заголовок кнопки
-        description: "Опис кнопки", // Описание кнопки
-        videoURL: URL(string: "https://www.youtube.com/embed/r4mD0TD8880?si=BJe0IraJo9uSRSZv"), // Прямой URL видеофайла (пока пустой)
-        previewImageName: "77", // Имя изображения из ассетов
-        progressValues: [1, 1, 1, 0], // Значения прогресса для визуализации
-        progressTexts: ["   Ікроніжна.", "  Камболоподібна.", "  Довга малогомілкова.",  ""], // Тексты для прогресса
-        progressColors: [.red, .red, .red, .yellow] // Цвета для шкалы прогресса
+        title: "Підйом на носки стоячі.",
+        description: "Опис кнопки",
+        videoURL: URL(string: "https://www.youtube.com/embed/r4mD0TD8880?si=BJe0IraJo9uSRSZv"),
+        previewImageName: "77",
+        progressValues: [1, 1, 1, 0],
+        progressTexts: ["   Ікроніжна.", "  Камболоподібна.", "  Довга малогомілкова.",  ""],
+        progressColors: [.red, .red, .red, .yellow]
     ),
-    // Следующие кнопки слайдера аналогичны первой, но с разными значениями
+    
     SliderButton(
         title: "Підйом платформи у тренажері.",
         description: "Опис кнопки",
-        videoURL: URL(string: "https://www.youtube.com/embed/lpdvUgM1VDY?si=XyP9laQ_LQHQtgSI"), // URL видео
+        videoURL: URL(string: "https://www.youtube.com/embed/lpdvUgM1VDY?si=XyP9laQ_LQHQtgSI"),
         previewImageName: "78",
         progressValues: [1, 1, 0, 0],
-        progressTexts: ["  Ікроніжна.", "  Камболоподібна.", "",  ""],
+        progressTexts: ["  Гомілка.", "  Камболоподібна.", "",  ""],
         progressColors: [.red, .red, .red, .yellow]
     ),
     SliderButton(
@@ -28,7 +28,7 @@ let CalfMusculesbuttons = [
         videoURL: URL(string: ""),
         previewImageName: "79",
         progressValues: [1, 1, 0, 0],
-        progressTexts: ["  Ікроніжна.", "  Камболоподібна.", "",  ""],
+        progressTexts: ["  Гомілка.", "  Камболоподібна.", "",  ""],
         progressColors: [.red, .red, .red, .yellow]
     ),
     SliderButton(
@@ -42,62 +42,61 @@ let CalfMusculesbuttons = [
     ),
 ]
 
-// Основное представление, содержащее горизонтальный слайдер и кнопки слайдера.
-struct CalfMuscules: View {
-    @Environment(\.presentationMode) var presentationMode // Получаем доступ к режиму представления для управления навигацией
 
-    @State private var selectedIndex = 0 // Храним индекс выбранной кнопки
+struct CalfMuscules: View {
+    @Environment(\.colorScheme) var colorScheme
+
+    @Environment(\.presentationMode) var presentationMode
+
+    @State private var selectedIndex = 0
     
     var body: some View {
-        NavigationView { // Начинаем навигационное представление
-            GeometryReader { geometry in // Используем GeometryReader для адаптации макета
+        NavigationView {
+            GeometryReader { geometry in
                 ZStack {
-                    Image("listBumagy") // Задаем фоновое изображение
-                        .resizable() // Делаем изображение изменяемым по размеру
-                        .aspectRatio(contentMode: .fill) // Заполняем пространство, сохраняя пропорции
-                        .edgesIgnoringSafeArea(.all) // Игнорируем безопасные зоны для полного экрана
+                    Image(colorScheme == .dark ? "listBumagy2" : "listBumagy")
+                        .resizable()
+                        .scaledToFill()
+                        .edgesIgnoringSafeArea(.all)
                     
-                    VStack { // Используем вертикальный стек для размещения элементов
-                        ScrollView(.horizontal, showsIndicators: false) { // Создаем горизонтальный ScrollView
-                            HStack(spacing: 20) { // Используем горизонтальный стек с заданным расстоянием между элементами
-                                ForEach(CalfMusculesbuttons.indices, id: \.self) { index in // Перебираем кнопки слайдера
-                                    NavigationLink(destination: DetailView(button: CalfMusculesbuttons[index])) { // Создаем переход к DetailView
-                                        SliderButtonView(button: CalfMusculesbuttons[index], selectedIndex: $selectedIndex, index: index, geometry: geometry) // Отображаем кнопку слайдера
+                    VStack {
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack(spacing: 20) {
+                                ForEach(CalfMusculesbuttons.indices, id: \.self) { index in
+                                    NavigationLink(destination: DetailView(button: CalfMusculesbuttons[index])) {
+                                        SliderButtonView(button: CalfMusculesbuttons[index], selectedIndex: $selectedIndex, index: index, geometry: geometry)
                                     }
                                 }
+                                .background(colorScheme == .dark ? .white.opacity(0.8) : .black.opacity(0.2))
+                                .cornerRadius(8)
                             }
-                            .padding() // Добавляем отступы
-                        }
-                        .padding(.top, -90) // Задаем отрицательный отступ сверху
+                            .padding()                         }
+                        .padding(.top, -90)
                         
                     }
                 }
-                VStack { // Создаем вертикальный стек для размещения основной информации и кнопки
-                    Spacer() // Отодвигает содержимое вверх
-
-                    // Иконка "Назад" внизу
+                VStack {
+                    Spacer()
                     Button(action: {
-                        // Возврат на предыдущий экран
-                        presentationMode.wrappedValue.dismiss() // Закрываем текущее представление
+                        presentationMode.wrappedValue.dismiss()
                     }) {
-                        Image(systemName: "house.fill") // Иконка в виде дома
-                            .font(.largeTitle) // Задаем размер шрифта
-                            .foregroundColor(.black) // Задаем цвет иконки
-                            .padding(.vertical, 10) // Добавляем вертикальные отступы
+                        Image(systemName: "house.fill")
+                            .font(.largeTitle)
+                            .foregroundColor(colorScheme == .dark ? .white : .black)                            .padding(.vertical, 10)
                     }
-                    
-                    .frame(maxWidth: .infinity) // Задаем максимальную ширину кнопки
-                    .background(Color.gray.opacity(0.2)) // Задаем цвет фона кнопки с прозрачностью
+                    .frame(maxWidth: .infinity)
+                    .background(Color.black.opacity(0.2))
                 }
+
             }
         }
-        .navigationBarBackButtonHidden(true) // Скрыть кнопку «Назад» в навигационной панели
+        .navigationBarBackButtonHidden(true)
     }
 }
 
-// Провайдер предварительного просмотра для SwiftUI.
+
 struct CalfMusculesDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        CalfMuscules() // Предварительный просмотр основного представления
+        CalfMuscules()
     }
 }

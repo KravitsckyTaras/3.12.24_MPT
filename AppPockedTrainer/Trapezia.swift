@@ -9,48 +9,50 @@ import WebKit
 // Пример данных для кнопок слайдера
 let Tbuttons = [
     SliderButton(
-        title: "Тяга штанги до підборіддя.",
+        title: "Шраги з гантелями стоячі.",
         description: "Описание кнопки 1",
-        videoURL: URL(string: "https://www.youtube.com/embed/Cz3BIJ71m6U?si=qghbg5KZ1se5nzCh"), // Прямой URL видеофайла
-        previewImageName: "94", // Имя изображения из ассетов (опционально).
+        videoURL: URL(string: "https://www.youtube.com/embed/Cz3BIJ71m6U?si=qghbg5KZ1se5nzCh"),
+        previewImageName: "94",
         progressValues: [1, 1, 0.8, 0],
         progressTexts: ["  Трапеціподібна.", "  Ромбодібна.", "  Шия.",  ""]
-        ,progressColors: [.red, .red, .orange, .yellow,]  // Цвета для шкалы прогресса
+        ,progressColors: [.red, .red, .orange, .yellow,]
     ),
 
     SliderButton(
-        title: "Шрагі зі штангою перед собою.",
+        title: "Шраги зі штангою перед собою.",
         description: "2",
         videoURL: URL(string: "https://www.youtube.com/embed/MPDdhA4sqcY?si=NqZXMgEsm4u_qnVv"),
         previewImageName: "1",
         progressValues: [1, 1, 0.7, 0.6],
         progressTexts: [" Верх Трапецібодібноі.", "  Середина Трапецібодібноі.","  Шия.", "  Ромбоподібна."]
-        ,progressColors: [.red, .red, .orange, .yellow,] // Цвета для шкалы прогресса
+        ,progressColors: [.red, .red, .orange, .yellow,]
     ),
     SliderButton(
         title: "Шраги зі штангою за спиною.",
         description: "Описание кнопки 3",
-        videoURL: URL(string: "https://www.youtube.com/embed/03I3dap_LMg?si=eyzNRimjsVWFezVo"), // Прямой URL видеофайла
-        previewImageName: "2", // Имя изображения из ассетов (опционально).
+        videoURL: URL(string: "https://www.youtube.com/embed/03I3dap_LMg?si=eyzNRimjsVWFezVo"),
+        previewImageName: "2",
         progressValues: [1, 0.7, 0.7, 0],
         progressTexts: [" Верх трапеціподібноі.",  "  Ромбоподібна.", "  Шия.", ""],
-        progressColors: [.red, .orange, .orange, .yellow]  // Цвета для шкалы прогресса
+        progressColors: [.red, .orange, .orange, .yellow]
     ),
     SliderButton(
         title: "Тяга штанги до підборіддя.",
         description: "Описание кнопки 4",
-        videoURL: URL(string: "https://youtube.com/embed/7cEfqmysJfU?feature=share"), // Прямой URL видеофайла
-        previewImageName: "3", // Имя изображения из ассетов (опционально).
+        videoURL: URL(string: "https://youtube.com/embed/7cEfqmysJfU?feature=share"),
+        previewImageName: "3",
         progressValues: [1, 1, 0.8, 0.4],
         progressTexts: ["  Трапеціподібна.", "  Середня дельта.", "  Передня дельта.",  "  Біцепс."]
-        ,progressColors: [.red, .red, .orange, .yellow,]  // Цвета для шкалы прогресса
+        ,progressColors: [.red, .red, .orange, .yellow,]
     ),
 
 ]
 
 
-// Основное представление, содержащее горизонтальный слайдер и кнопки слайдера.
+
 struct Trapezia: View {
+    @Environment(\.colorScheme) var colorScheme
+
     @State private var selectedIndex = 0
     @Environment(\.presentationMode) var presentationMode
 
@@ -58,9 +60,9 @@ struct Trapezia: View {
         NavigationView {
             GeometryReader { geometry in
                 ZStack {
-                    Image("listBumagy")
+                    Image(colorScheme == .dark ? "listBumagy2" : "listBumagy")
                         .resizable()
-                        .aspectRatio(contentMode: .fill)
+                        .scaledToFill()
                         .edgesIgnoringSafeArea(.all)
                     
                     VStack {
@@ -71,6 +73,8 @@ struct Trapezia: View {
                                         SliderButtonView(button: Tbuttons[index], selectedIndex: $selectedIndex, index: index, geometry: geometry)
                                     }
                                 }
+                                .background(colorScheme == .dark ? .white.opacity(0.8) : .black.opacity(0.2))
+                                .cornerRadius(8)
                             }
                             .padding()
                         }
@@ -80,32 +84,24 @@ struct Trapezia: View {
                     }
                 }
                 VStack {
-                    // Ваш основной контент здесь
-                    
-                    Spacer() // Отодвигает содержимое вверх
-
-                    // Иконка "Назад" внизу
+                    Spacer()
                     Button(action: {
-                        // Возврат на предыдущий экран
                         presentationMode.wrappedValue.dismiss()
                     }) {
                         Image(systemName: "house.fill")
                             .font(.largeTitle)
-                            .foregroundColor(.black)
-                            .padding(.vertical, 10)
+                            .foregroundColor(colorScheme == .dark ? .white : .black)                            .padding(.vertical, 10)
                     }
-                    
                     .frame(maxWidth: .infinity)
-                    .background(Color.gray.opacity(0.2))
-
+                    .background(Color.black.opacity(0.2))
                 }
             }
         }
-        .navigationBarBackButtonHidden(true) // Скрыть кнопку «Назад»
+        .navigationBarBackButtonHidden(true) 
     }
 }
 
-// Провайдер предварительного просмотра для SwiftUI.
+
 struct TMuscleDetailView_Previews: PreviewProvider {
     static var previews: some View {
         Trapezia()

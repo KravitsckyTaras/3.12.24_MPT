@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7EBEBA7A2CF891060044B8B0 /* Calckulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBEBA792CF890FA0044B8B0 /* Calckulator.swift */; };
 		EF51DE512CB8111200B6E821 /* Quadro.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF51DE502CB810F700B6E821 /* Quadro.swift */; };
 		EF51DE532CB812CF00B6E821 /* ThingBiceps.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF51DE522CB812B900B6E821 /* ThingBiceps.swift */; };
 		EF51DE552CB813D800B6E821 /* Glunus.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF51DE542CB813D600B6E821 /* Glunus.swift */; };
@@ -34,6 +35,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7EBEBA792CF890FA0044B8B0 /* Calckulator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calckulator.swift; sourceTree = "<group>"; };
 		EF51DE502CB810F700B6E821 /* Quadro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quadro.swift; sourceTree = "<group>"; };
 		EF51DE522CB812B900B6E821 /* ThingBiceps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThingBiceps.swift; sourceTree = "<group>"; };
 		EF51DE542CB813D600B6E821 /* Glunus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Glunus.swift; sourceTree = "<group>"; };
@@ -42,7 +44,7 @@
 		FA02E6702CBD337E0090D4C2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		FA2DE0042CC91DD800824600 /* NewTrainingWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTrainingWindow.swift; sourceTree = "<group>"; };
 		FABBF3C82CCE7A7A00B54091 /* InterfaceForExersize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceForExersize.swift; sourceTree = "<group>"; };
-		FAE1C5542CA559CD00AB13C3 /* AppPockedTrainer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppPockedTrainer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FAE1C5542CA559CD00AB13C3 /* MyPocketTrainer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyPocketTrainer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAE1C5572CA559CD00AB13C3 /* AppPockedTrainerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPockedTrainerApp.swift; sourceTree = "<group>"; };
 		FAE1C55B2CA559CE00AB13C3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FAE1C55E2CA559CE00AB13C3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -83,7 +85,7 @@
 		FAE1C5552CA559CD00AB13C3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				FAE1C5542CA559CD00AB13C3 /* AppPockedTrainer.app */,
+				FAE1C5542CA559CD00AB13C3 /* MyPocketTrainer.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -97,6 +99,7 @@
 				FAF1E1522CC68F6C004F0737 /* MyData 2.swift */,
 				FA2DE0042CC91DD800824600 /* NewTrainingWindow.swift */,
 				FAE1C5A82CA9D5A100AB13C3 /* DDetailView.swift */,
+				7EBEBA792CF890FA0044B8B0 /* Calckulator.swift */,
 				FAE1C56B2CA55AD800AB13C3 /* NextView.swift */,
 				FAE1C5792CA5605B00AB13C3 /* WebView.swift */,
 				FAE1C56F2CA55E8600AB13C3 /* Chest.swift */,
@@ -144,7 +147,7 @@
 			);
 			name = AppPockedTrainer;
 			productName = AppPockedTrainer;
-			productReference = FAE1C5542CA559CD00AB13C3 /* AppPockedTrainer.app */;
+			productReference = FAE1C5542CA559CD00AB13C3 /* MyPocketTrainer.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -210,6 +213,7 @@
 				FA2DE0052CC91DEB00824600 /* NewTrainingWindow.swift in Sources */,
 				FAE1C5782CA55EE300AB13C3 /* Triceps.swift in Sources */,
 				EF51DEA72CB9B9B500B6E821 /* CalfMuscules.swift in Sources */,
+				7EBEBA7A2CF891060044B8B0 /* Calckulator.swift in Sources */,
 				FAE1C5582CA559CD00AB13C3 /* AppPockedTrainerApp.swift in Sources */,
 				FAE1C5762CA55EC600AB13C3 /* Biceps.swift in Sources */,
 				FA02E6712CBD33980090D4C2 /* ContentView.swift in Sources */,
@@ -358,15 +362,16 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = Kravitscky.AppPockedTrainer;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = MyPocketTrainer;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -391,15 +396,16 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = Kravitscky.AppPockedTrainer;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = MyPocketTrainer;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;

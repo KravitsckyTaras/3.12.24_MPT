@@ -82,10 +82,10 @@ let buttons = [
         title: "Жим штанги під кутом 40.",
         description: "Описание кнопки 6",
         videoURL: URL(string: "https://youtube.com/embed/gHs2E4zqoZA?si=sAB1vuH2pSv-I3zg"), // Прямой URL видеофайла
-        previewImageName: "32", // Имя изображения из ассетов (опционально).
+        previewImageName: "32",
         progressValues: [1, 1, 0.9, 0.7],
         progressTexts: ["  Верх грудних м'язів.", "  Середина грудних м'язів.", "  Плечі.", "  Тріцепс.",]
-        ,progressColors: [.red, .red, .red, .yellow,] // Цвета для шкалы прогресса
+        ,progressColors: [.red, .red, .red, .yellow,]
     ),
     SliderButton(
         title: "Зведення у кросовері під кутом.",
@@ -100,17 +100,18 @@ let buttons = [
         title: "Жим в хамері ",
         description: "Описание кнопки 6",
         videoURL: URL(string: "https://youtube.com/embed/HoBdaZwL2QY?si=QjTMRAIy5WMUk3H6"), // Прямой URL видеофайла
-        previewImageName: "98", // Имя изображения из ассетов (опционально).
+        previewImageName: "98", 
         progressValues: [1, 1, 0.6, 0.6],
         progressTexts: ["  Верх грудних м'язів.", "  Середина грудних м'язів.", "  Плечі.", "  Бісепс.",]
-        ,progressColors: [.red, .red, .yellow, .yellow,]  // Цвета для шкалы прогресса
+        ,progressColors: [.red, .red, .yellow, .yellow,]  
     ),
 
 ]
 
 
-// Основное представление, содержащее горизонтальный слайдер и кнопки слайдера
+
 struct Chest: View {
+    @Environment(\.colorScheme) var colorScheme 
     @State private var selectedIndex = 0
     @Environment(\.presentationMode) var presentationMode
 
@@ -118,9 +119,8 @@ struct Chest: View {
         NavigationView {
             GeometryReader { geometry in
                 ZStack {
-                    Image("listBumagy")
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
+                    Image(colorScheme == .dark ? "listBumagy2" : "listBumagy")                        .resizable()
+                        .scaledToFill()
                         .edgesIgnoringSafeArea(.all)
                     
                     VStack {
@@ -131,6 +131,8 @@ struct Chest: View {
                                         SliderButtonView(button: buttons[index], selectedIndex: $selectedIndex, index: index, geometry: geometry)
                                     }
                                 }
+                                .background(colorScheme == .dark ? .white.opacity(0.8) : .black.opacity(0.2))
+                                .cornerRadius(8)
                             }
                             .padding()
                         }
@@ -145,11 +147,10 @@ struct Chest: View {
                     }) {
                         Image(systemName: "house.fill")
                             .font(.largeTitle)
-                            .foregroundColor(.black)
-                            .padding(.vertical, 10)
+                            .foregroundColor(colorScheme == .dark ? .white : .black)                            .padding(.vertical, 10)
                     }
                     .frame(maxWidth: .infinity)
-                    .background(Color.gray.opacity(0.2))
+                    .background(Color.black.opacity(0.2))
                 }
             }
         }

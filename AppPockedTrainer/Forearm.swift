@@ -2,38 +2,33 @@ import SwiftUI
 import AVKit
 import WebKit
 
-
-
-
-
-// Пример данных для кнопок слайдера
 let Fbuttons = [
     SliderButton(
         title: "Згинання запьястка.",
         description: "Описание кнопки 1",
-        videoURL: URL(string: "https://www.youtube.com/embed/U7DReKMtKz0?si=WZTxgK5x3UWBO-LV"), // Прямой URL видеофайла
-        previewImageName: "81", // Имя изображения из ассетов (опционально).
+        videoURL: URL(string: "https://www.youtube.com/embed/U7DReKMtKz0?si=WZTxgK5x3UWBO-LV"),
+        previewImageName: "81",
         progressValues: [1, 1, 1, 0],
         progressTexts: ["  Довга долонна.", "  Розгинач зап'ястя.", "  Ліктьовий згинач зап'ястя.",  ""]
-        ,progressColors: [.red, .red, .red, .yellow,]  // Цвета для шкалы прогресса
+        ,progressColors: [.red, .red, .red, .yellow,]  
     ),
     SliderButton(
         title: "Згинання запьястка з верх. блоку.",
         description: "Описание кнопки 1",
-        videoURL: URL(string: "https://www.youtube.com/embed/F6emEG2Ow_g?si=pAgVyowy2AK6I0qp"), // Прямой URL видеофайла
-        previewImageName: "19", // Имя изображения из ассетов (опционально).
+        videoURL: URL(string: "https://www.youtube.com/embed/F6emEG2Ow_g?si=pAgVyowy2AK6I0qp"),
+        previewImageName: "19",
         progressValues: [1, 1, 1, 0],
         progressTexts: ["  Довга долонна.", "  Розгинач зап'ястя.", "  Ліктьовий згинач зап'ястя.",  ""]
-        ,progressColors: [.red, .red, .red, .yellow,]  // Цвета для шкалы прогресса
+        ,progressColors: [.red, .red, .red, .yellow,]
     ),
     SliderButton(
-        title: "Згинання запьястка низ. блоку.",
+        title: "Згинання запьястка нижн. блоку.",
         description: "Описание кнопки 1",
-        videoURL: URL(string: "https://www.youtube.com/embed/Rggxw-j4aw8?si=o3T2cMl0qLBBa3_T"), // Прямой URL видеофайла
-        previewImageName: "forearm99", // Имя изображения из ассетов (опционально).
+        videoURL: URL(string: "https://www.youtube.com/embed/Rggxw-j4aw8?si=o3T2cMl0qLBBa3_T"),
+        previewImageName: "forearm99",
         progressValues: [1, 1, 1, 0],
         progressTexts: ["  Довга долонна.", "  Розгинач зап'ястя.", "  Ліктьовий згинач зап'ястя.",  ""]
-        ,progressColors: [.red, .red, .red, .yellow,]  // Цвета для шкалы прогресса
+        ,progressColors: [.red, .red, .red, .yellow,]  
     ),
 
 
@@ -42,8 +37,10 @@ let Fbuttons = [
 ]
 
 
-// Основное представление, содержащее горизонтальный слайдер и кнопки слайдера.
+
 struct Forearm: View {
+    @Environment(\.colorScheme) var colorScheme
+
     @State private var selectedIndex = 0
     @Environment(\.presentationMode) var presentationMode
 
@@ -51,9 +48,8 @@ struct Forearm: View {
         NavigationView {
             GeometryReader { geometry in
                 ZStack {
-                    Image("listBumagy")
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
+                    Image(colorScheme == .dark ? "listBumagy2" : "listBumagy")                        .resizable()
+                        .scaledToFill()
                         .edgesIgnoringSafeArea(.all)
                     
                     VStack {
@@ -64,6 +60,8 @@ struct Forearm: View {
                                         SliderButtonView(button: Fbuttons[index], selectedIndex: $selectedIndex, index: index, geometry: geometry)
                                     }
                                 }
+                                .background(colorScheme == .dark ? .white.opacity(0.8) : .black.opacity(0.2))
+                                .cornerRadius(8)
                             }
                             .padding()
                         }
@@ -72,32 +70,24 @@ struct Forearm: View {
                     }
                 }
                 VStack {
-                    // Ваш основной контент здесь
-                    
-                    Spacer() // Отодвигает содержимое вверх
-
-                    // Иконка "Назад" внизу
+                    Spacer()
                     Button(action: {
-                        // Возврат на предыдущий экран
                         presentationMode.wrappedValue.dismiss()
                     }) {
                         Image(systemName: "house.fill")
                             .font(.largeTitle)
-                            .foregroundColor(.black)
-                            .padding(.vertical, 10)
+                            .foregroundColor(colorScheme == .dark ? .white : .black)                            .padding(.vertical, 10)
                     }
-                    
                     .frame(maxWidth: .infinity)
-                    .background(Color.gray.opacity(0.2))
-
+                    .background(Color.black.opacity(0.2))
                 }
             }
         }
-        .navigationBarBackButtonHidden(true) // Скрыть кнопку «Назад»
+        .navigationBarBackButtonHidden(true) 
     }
 }
 
-// Провайдер предварительного просмотра для SwiftUI.
+
 struct FMuscleDetailView_Previews: PreviewProvider {
     static var previews: some View {
         Forearm()
